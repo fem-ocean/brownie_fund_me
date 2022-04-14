@@ -1,0 +1,30 @@
+dependencies:
+  # -<organization/repo>@<version>
+  - smartcontractkit/chainlink-brownie-contracts@1.1.1    #now brownie know to download this repo
+
+compiler: #mr compiler
+  solc:   #when it compiles
+    remappings:   # remap this to this
+      - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1' 
+      #above we are telling the compiler that wherever u see the @chainlink it refers to smartcontractkit/chainlink-brownie-contacts
+
+#now brownie can compile successfully. Run $brownie compile
+
+dotenv: .env
+
+networks:
+  default: "development" #default is always set to development but it can always be changed.
+  rinkeby:
+    eth_usd_price_feed: "0x778D439dbafF802a21062F91f2f7029353A0D7e6"
+    verify: True
+  mainnet-fork-dev:
+    eth_usd_price_feed: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+    verify: False
+  #kovan:
+  # mainnet:
+  development:
+    verify: False
+  ganache-local:
+    verify: False
+wallets:
+  from_key: ${PRIVATE_KEY}
